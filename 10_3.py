@@ -16,7 +16,7 @@ def draw_tiles():
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
-ROWS = 200# по вертикали
+ROWS = 10# по вертикали
 COLS = 200# по горизонтали
 MARGIN = 2#
 pygame.init()
