@@ -63,8 +63,7 @@ class SplashScreen(State):
 class Menuscreen(State):
     def __init__(self):
         self.items = ['Играть','Выбрать имя игрока','Выйти']
-        #self.text = "Menu"
-        self.surface = [font.render(item, True, (255, 255, 255)) for item in self.items]
+        self.surfaces = [font.render(item, True, (255, 255, 255)) for item in self.items]
         self.selected = 0
 
     def handle_events(self, events):
@@ -75,27 +74,24 @@ class Menuscreen(State):
             if event.type == KEYDOWN:
                 if event.key == pygame.K_UP:
                     self.prev()
-                if event.key == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
                     self.next()
                 if event.key == pygame.K_SPACE or event.key == pygame.K_RETURN:
                     return self.process_item()
         return self
 
-
     def update(self):
         pass
 
-def draw(self, screen):
-    screen.fill((0,0,0))
-
-    for i, surface in enumerate(self.surfaces):
-        rect = surface.get_rect()
-        rect.centerx = screen.get_rect().centerx
-        rect.top = screen.get_rect().top +  100 * (i + 1)
-
-    if i == self.selected:
-        surface = font.render(self.items[i], True, (255, 0, 0))
-    screen.blit(surface, rect)
+    def draw(self, screen):
+        screen.fill((0,0,0))
+        for i, item in enumerate(self.items):
+            color = (255, 0, 0) if i == self.selected else (255, 255, 255)
+            surface = font.render(item, True, color)
+            rect = surface.get_rect()
+            rect.centerx = screen.get_rect().centerx
+            rect.top = screen.get_rect().top + 100 * (i + 1)
+            screen.blit(surface, rect)
 
     def next(self):
         if self.selected < len(self.items) - 1:
